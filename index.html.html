@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sheetla Public School — Excellence in Education & Values</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8D48B;
+  --gold-dark: #8B6914;
+  --navy: #0A1628;
+  --navy-light: #132242;
+  --cream: #FFF8EE;
+  --cream-dark: #F0E6D3;
+  --maroon: #6B1D2A;
+  --white: #FFFFFF;
+  --text: #2A2A2A;
+  --text-light: #6B6B6B;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ===== PRELOADER ===== */
+.preloader {
+  position: fixed; inset:0; z-index:9999;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 20px;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.preloader.hide { opacity:0; visibility:hidden; }
+.preloader-crest {
+  width: 80px; height: 80px;
+  border: 3px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  animation: crestPulse 1.5s ease-in-out infinite;
+}
+.preloader-crest span {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 900; color: var(--gold);
+}
+.preloader-text {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--gold-light); font-size: 14px; letter-spacing: 6px; text-transform: uppercase;
+}
+@keyframes crestPulse {
+  0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201,168,76,0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 30px 10px rgba(201,168,76,0.15); }
+}
+
+/* ===== CURSOR GLOW ===== */
+.cursor-glow {
+  position: fixed; width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: left 0.3s ease, top 0.3s ease;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index: 1000;
+  padding: 18px 50px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(10,22,40,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  transform: translateY(-100%);
+  animation: slideDown 0.8s ease 1.8s forwards;
+}
+@keyframes slideDown { to { transform: translateY(0); } }
+
+.nav-brand {
+  display: flex; align-items: center; gap: 14px;
+  text-decoration: none;
+}
+.nav-crest {
+  width: 42px; height: 42px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: 18px; color: var(--gold);
+}
+.nav-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; color: var(--white); font-weight: 700;
+}
+.nav-name small {
+  display: block; font-family: 'DM Sans', sans-serif;
+  font-size: 10px; color: var(--gold-light);
+  letter-spacing: 3px; text-transform: uppercase; font-weight: 400;
+}
+
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;
+  font-weight: 500; position: relative; transition: color 0.3s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left:0;
+  width: 0; height: 1px; background: var(--gold);
+  transition: width 0.4s ease;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold); padding: 10px 28px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.4s ease;
+  text-decoration: none;
+}
+.nav-cta:hover {
+  background: var(--gold); color: var(--navy);
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-bg-pattern {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(107,29,42,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(201,168,76,0.05) 0%, transparent 50%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: gridShift 20s linear infinite;
+}
+@keyframes gridShift {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(80px,80px); }
+}
+
+.hero-content {
+  text-align: center; z-index: 2;
+  padding: 0 20px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  padding: 8px 24px; border-radius: 40px;
+  margin-bottom: 40px;
+  opacity: 0; animation: fadeUp 1s ease 2s forwards;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold);
+  animation: blink 2s ease infinite;
+}
+@keyframes blink {
+  0%,100% { opacity:1; } 50% { opacity:0.3; }
+}
+.hero-badge span {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold-light); font-weight: 500;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 7vw, 96px);
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 10px;
+  opacity: 0; animation: fadeUp 1s ease 2.2s forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 50px;
+  opacity: 0; animation: fadeUp 1s ease 2.4s forwards;
+}
+.hero-buttons {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 1s ease 2.6s forwards;
+}
+.btn-primary {
+  background: var(--gold); color: var(--navy);
+  padding: 16px 44px; border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(201,168,76,0.3);
+}
+.btn-secondary {
+  background: transparent; color: var(--white);
+  padding: 16px 44px;
+  border: 1px solid rgba(255,255,255,0.2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.3s ease;
+  text-decoration: none;
+}
+.btn-secondary:hover {
+  border-color: var(--gold); color: var(--gold);
+}
+
+.hero-scroll {
+  position: absolute; bottom: 40px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeUp 1s ease 3s forwards;
+}
+.hero-scroll span {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ===== FLOATING PARTICLES ===== */
+.particles {
+  position: absolute; inset: 0; pointer-events: none;
+}
+.particle {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: float 8s ease-in-out infinite;
+}
+.particle:nth-child(1) { left:10%; top:20%; animation-delay:0s; }
+.particle:nth-child(2) { left:25%; top:70%; animation-delay:1.5s; }
+.particle:nth-child(3) { left:55%; top:30%; animation-delay:3s; }
+.particle:nth-child(4) { left:75%; top:60%; animation-delay:4.5s; }
+.particle:nth-child(5) { left:90%; top:40%; animation-delay:6s; }
+.particle:nth-child(6) { left:40%; top:85%; animation-delay:2s; }
+@keyframes float {
+  0%,100% { opacity:0; transform:translateY(0) scale(1); }
+  25% { opacity:0.6; }
+  50% { opacity:0.3; transform:translateY(-80px) scale(1.5); }
+  75% { opacity:0.5; }
+}
+
+/* ===== STATS RIBBON ===== */
+.stats-ribbon {
+  background: var(--white);
+  border-top: 1px solid rgba(201,168,76,0.2);
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  padding: 60px 50px;
+  display: flex; justify-content: center; gap: 80px; flex-wrap: wrap;
+}
+.stat-item {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+.stat-item.visible { opacity:1; transform:translateY(0); }
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px; font-weight: 900;
+  color: var(--navy);
+  line-height: 1;
+}
+.stat-number span { color: var(--gold); }
+.stat-label {
+  font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--text-light); margin-top: 8px;
+}
+
+/* ===== SECTION COMMON ===== */
+section { padding: 120px 50px; }
+.section-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 20px;
+}
+.section-tag-line {
+  width: 40px; height: 1px; background: var(--gold);
+}
+.section-tag span {
+  font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold-dark); font-weight: 600;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+.section-desc {
+  font-size: 16px; color: var(--text-light);
+  max-width: 560px; line-height: 1.8;
+}
+
+/* ===== ABOUT ===== */
+.about {
+  background: var(--cream);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.about-visual {
+  position: relative;
+}
+.about-image-frame {
+  position: relative;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  padding: 30px;
+  overflow: hidden;
+}
+.about-image-frame::before {
+  content: '';
+  position: absolute; top: 15px; left: 15px;
+  right: 15px; bottom: 15px;
+  border: 1px solid var(--gold);
+  opacity: 0.3; z-index: 1;
+}
+.about-image-frame img {
+  width: 100%; display: block;
+  filter: sepia(0.15) contrast(1.05);
+}
+.about-float-badge {
+  position: absolute; bottom: -20px; right: -20px;
+  background: var(--gold);
+  padding: 24px 30px;
+  text-align: center;
+  z-index: 2;
+}
+.about-float-badge .big {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px; font-weight: 900;
+  color: var(--navy); line-height: 1;
+}
+.about-float-badge .small {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--navy); opacity: 0.7;
+}
+.about-features {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px; margin-top: 40px;
+}
+.about-feature {
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid rgba(201,168,76,0.15);
+  transition: all 0.4s ease;
+}
+.about-feature:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(201,168,76,0.1);
+}
+.about-feature-icon {
+  font-size: 28px; margin-bottom: 12px;
+}
+.about-feature h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; margin-bottom: 6px;
+  color: var(--navy);
+}
+.about-feature p {
+  font-size: 13px; color: var(--text-light); line-height: 1.6;
+}
+
+/* ===== PROGRAMS ===== */
+.programs { background: var(--navy); color: var(--white); }
+.programs .section-tag span { color: var(--gold-light); }
+.programs .section-title { color: var(--white); }
+.programs .section-desc { color: rgba(255,255,255,0.5); }
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px; margin-top: 60px;
+}
+.program-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 44px 36px;
+  position: relative; overflow: hidden;
+  transition: all 0.5s ease;
+  cursor: default;
+}
+.program-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.5s ease;
+}
+.program-card:hover::before { transform: scaleX(1); }
+.program-card:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(201,168,76,0.2);
+  transform: translateY(-6px);
+}
+.program-icon {
+  width: 56px; height: 56px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 28px;
+  border-radius: 4px;
+}
+.program-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; margin-bottom: 14px;
+}
+.program-card p {
+  color: rgba(255,255,255,0.45);
+  font-size: 14px; line-height: 1.8;
+}
+.program-tag {
+  display: inline-block; margin-top: 20px;
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
+  padding: 6px 16px;
+}
+
+/* ===== VALUES ===== */
+.values { background: var(--white); text-align: center; }
+.values-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 40px; margin-top: 60px;
+}
+.value-item {
+  padding: 40px 24px;
+  transition: all 0.4s ease;
+}
+.value-item:hover { transform: translateY(-6px); }
+.value-ring {
+  width: 90px; height: 90px; margin: 0 auto 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+  transition: all 0.5s ease;
+  position: relative;
+}
+.value-item:hover .value-ring {
+  border-color: var(--gold);
+  box-shadow: 0 0 40px rgba(201,168,76,0.15);
+}
+.value-item h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; color: var(--navy);
+  margin-bottom: 10px;
+}
+.value-item p {
+  font-size: 13px; color: var(--text-light); line-height: 1.7;
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  color: var(--white);
+  text-align: center;
+}
+.testimonials .section-tag span { color: var(--gold-light); }
+.testimonials .section-title { color: var(--white); }
+.testimonial-slider {
+  max-width: 700px; margin: 60px auto 0;
+  position: relative;
+}
+.testimonial-card {
+  display: none;
+  padding: 50px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  animation: fadeIn 0.6s ease;
+}
+.testimonial-card.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.testimonial-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-style: italic;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+.testimonial-quote::before {
+  content: '"'; display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 60px; color: var(--gold);
+  line-height: 1; margin-bottom: 10px;
+}
+.testimonial-author {
+  font-weight: 600; font-size: 14px; letter-spacing: 1px;
+}
+.testimonial-role {
+  font-size: 12px; color: var(--gold-light); margin-top: 4px;
+}
+.testimonial-dots {
+  display: flex; gap: 10px; justify-content: center; margin-top: 30px;
+}
+.t-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none; cursor: pointer;
+  transition: all 0.3s ease;
+}
+.t-dot.active { background: var(--gold); transform: scale(1.3); }
+
+/* ===== ADMISSION CTA ===== */
+.admission-cta {
+  background: var(--cream);
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.admission-cta::before {
+  content: '';
+  position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.08), transparent 70%);
+}
+.cta-box {
+  position: relative; z-index: 1;
+  max-width: 680px; margin: 0 auto;
+}
+.cta-box .section-title em { color: var(--gold-dark); font-style: italic; }
+.cta-box p {
+  font-size: 16px; color: var(--text-light);
+  line-height: 1.8; margin-bottom: 40px;
+}
+.cta-info {
+  display: flex; justify-content: center; gap: 50px;
+  margin-bottom: 40px; flex-wrap: wrap;
+}
+.cta-info-item {
+  display: flex; align-items: center; gap: 10px;
+}
+.cta-info-item span:first-child { font-size: 20px; }
+.cta-info-item span:last-child {
+  font-size: 14px; color: var(--text-light);
+}
+
+/* ===== GALLERY ===== */
+.gallery { background: var(--white); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px; margin-top: 60px;
+}
+.gallery-item {
+  position: relative; overflow: hidden;
+  background: var(--navy);
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+.gallery-item:first-child {
+  grid-column: span 2; grid-row: span 2;
+  aspect-ratio: auto;
+}
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s ease, filter 0.6s ease;
+  filter: sepia(0.1);
+}
+.gallery-item:hover img {
+  transform: scale(1.08);
+  filter: sepia(0);
+}
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,22,40,0.8), transparent 50%);
+  display: flex; align-items: flex-end; padding: 24px;
+  opacity: 0; transition: opacity 0.4s ease;
+}
+.gallery-item:hover .gallery-overlay { opacity:1; }
+.gallery-overlay span {
+  color: var(--white); font-family: 'Playfair Display', serif;
+  font-size: 16px;
+}
+
+/* ===== CONTACT ===== */
+.contact {
+  background: var(--navy); color: var(--white);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+.contact .section-tag span { color: var(--gold-light); }
+.contact .section-title { color: var(--white); }
+.contact .section-desc { color: rgba(255,255,255,0.5); }
+
+.contact-details { margin-top: 50px; display: flex; flex-direction: column; gap: 30px; }
+.contact-item {
+  display: flex; align-items: flex-start; gap: 20px;
+}
+.contact-icon {
+  width: 50px; height: 50px; flex-shrink: 0;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.contact-item h4 {
+  font-size: 14px; color: var(--gold-light);
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.contact-item p {
+  font-size: 15px; color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+
+.contact-form { display: flex; flex-direction: column; gap: 24px; margin-top: 40px; }
+.form-group { position: relative; }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; padding: 16px 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  transition: border-color 0.3s;
+  outline: none;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: var(--gold);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group select option { background: var(--navy); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #060E1A;
+  padding: 60px 50px 30px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+.footer-top {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; flex-wrap: wrap;
+  gap: 40px; padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.footer-brand .nav-name { font-size: 22px; }
+.footer-motto {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-style: italic;
+  color: rgba(255,255,255,0.35);
+  margin-top: 10px;
+}
+.footer-links { display: flex; gap: 60px; }
+.footer-col h5 {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+}
+.footer-col a {
+  display: block; color: rgba(255,255,255,0.4);
+  text-decoration: none; font-size: 14px;
+  margin-bottom: 10px; transition: color 0.3s;
+}
+.footer-col a:hover { color: var(--gold-light); }
+.footer-bottom {
+  padding-top: 30px;
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: rgba(255,255,255,0.25);
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ===== MARQUEE ===== */
+.marquee-strip {
+  padding: 18px 0;
+  background: var(--gold);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-inner {
+  display: inline-block;
+  animation: marquee 30s linear infinite;
+}
+.marquee-inner span {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: 0 40px;
+}
+.marquee-inner span::after {
+  content: '✦'; margin-left: 40px; opacity: 0.5;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width: 1024px) {
+  section { padding: 80px 30px; }
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .about { grid-template-columns: 1fr; gap: 50px; }
+  .contact { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-ribbon { gap: 40px; padding: 40px 30px; }
+  .footer-links { gap: 30px; }
+  .cta-info { gap: 24px; }
+}
+@media(max-width: 640px) {
+  .about-features { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item:first-child { grid-column: span 1; grid-row: span 1; aspect-ratio: 16/10; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-top { flex-direction: column; }
+  .footer-bottom { flex-direction: column; gap: 10px; }
+  .programs-grid { grid-template-columns: 1fr; }
+  .stats-ribbon { gap: 24px; }
+  .stat-number { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+  <div class="preloader-crest"><span>S</span></div>
+  <div class="preloader-text">Sheetla Public School</div>
+</div>
+
+<!-- Cursor Glow -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- Navigation -->
+<nav>
+  <a href="#" class="nav-brand">
+    <div class="nav-crest">S</div>
+    <div class="nav-name">
+      Sheetla Public School
+      <small>CBSE Affiliated</small>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#values">Values</a></li>
+    <li><a href="#gallery">Life</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#admission" class="nav-cta">Admissions Open</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid"></div>
+  <div class="particles">
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Admissions 2026–27 Now Open</span>
+    </div>
+    <h1>Excellence in<br>Education &amp; <em>Values</em></h1>
+    <p class="hero-sub">Lakhanmajra, Rohtak — A CBSE English Medium Institution</p>
+    <div class="hero-buttons">
+      <a href="#admission" class="btn-primary">Apply Now</a>
+      <a href="#about" class="btn-secondary">Discover More</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Marquee Strip -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>CBSE Affiliated</span>
+    <span>English Medium</span>
+    <span>K.G. to 8th Class</span>
+    <span>Scholarship Test 15th March 2026</span>
+    <span>Excellence in Education</span>
+    <span>Co-Educational Institution</span>
+    <span>CBSE Affiliated</span>
+    <span>English Medium</span>
+    <span>K.G. to 8th Class</span>
+    <span>Scholarship Test 15th March 2026</span>
+    <span>Excellence in Education</span>
+    <span>Co-Educational Institution</span>
+  </div>
+</div>
+
+<!-- Stats Ribbon -->
+<div class="stats-ribbon">
+  <div class="stat-item">
+    <div class="stat-number" data-target="500">0<span>+</span></div>
+    <div class="stat-label">Students Enrolled</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" data-target="40">0<span>+</span></div>
+    <div class="stat-label">Expert Faculty</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" data-target="15">0<span>+</span></div>
+    <div class="stat-label">Years of Legacy</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" data-target="98">0<span>%</span></div>
+    <div class="stat-label">Pass Rate</div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-visual reveal">
+    <div class="about-image-frame">
+      <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop" alt="School Building">
+      <div class="about-float-badge">
+        <div class="big">15+</div>
+        <div class="small">Years of Trust</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="section-tag reveal">
+      <div class="section-tag-line"></div>
+      <span>Our Story</span>
+    </div>
+    <h2 class="section-title reveal reveal-delay-1">Nurturing Minds,<br>Building Futures</h2>
+    <p class="section-desc reveal reveal-delay-2">
+      Sheetla Public School, Lakhanmajra (Rohtak) is a CBSE-affiliated co-educational institution and a venture of Unique Public School, Pugthala, Sonipat. We are dedicated to fostering academic excellence alongside strong moral values, empowering students to become confident leaders of tomorrow.
+    </p>
+    <div class="about-features reveal reveal-delay-3">
+      <div class="about-feature">
+        <div class="about-feature-icon">📚</div>
+        <h4>CBSE Curriculum</h4>
+        <p>Rigorous English-medium academics aligned with national standards.</p>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">🏛️</div>
+        <h4>Modern Campus</h4>
+        <p>State-of-the-art facilities designed for holistic development.</p>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">🎯</div>
+        <h4>Focused Learning</h4>
+        <p>Small class sizes ensuring personalized attention.</p>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">🌟</div>
+        <h4>Value Education</h4>
+        <p>Character building integrated into daily learning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Programs -->
+<section class="programs" id="programs">
+  <div class="section-tag reveal">
+    <div class="section-tag-line"></div>
+    <span>Academics</span>
+  </div>
+  <h2 class="section-title reveal reveal-delay-1">Academic Programs</h2>
+  <p class="section-desc reveal reveal-delay-2">Comprehensive education from kindergarten through middle school, built on the CBSE framework.</p>
+
+  <div class="programs-grid">
+    <div class="program-card reveal">
+      <div class="program-icon">🌈</div>
+      <h3>Pre-Primary</h3>
+      <p>A joyful introduction to learning through play-based methods, storytelling, and creative exploration for ages 3–5.</p>
+      <div class="program-tag">K.G. — Nursery</div>
+    </div>
+    <div class="program-card reveal reveal-delay-1">
+      <div class="program-icon">📖</div>
+      <h3>Primary Wing</h3>
+      <p>Building strong foundations in literacy, numeracy, and scientific thinking with an activity-based curriculum.</p>
+      <div class="program-tag">Class 1 — 5</div>
+    </div>
+    <div class="program-card reveal reveal-delay-2">
+      <div class="program-icon">🔬</div>
+      <h3>Middle School</h3>
+      <p>Advanced academics with specialised labs, project-based learning, and competitive exam preparation.</p>
+      <div class="program-tag">Class 6 — 8</div>
+    </div>
+    <div class="program-card reveal reveal-delay-3">
+      <div class="program-icon">🏅</div>
+      <h3>Scholarship Program</h3>
+      <p>Pratibha Samman Pariksha — our flagship scholarship-cum-admission test offering fee concessions up to 100%.</p>
+      <div class="program-tag">Up to 100% Waiver</div>
+    </div>
+  </div>
+</section>
+
+<!-- Values -->
+<section class="values" id="values">
+  <div class="section-tag reveal" style="justify-content:center;">
+    <div class="section-tag-line"></div>
+    <span>Our Pillars</span>
+  </div>
+  <h2 class="section-title reveal reveal-delay-1">What We Stand For</h2>
+
+  <div class="values-grid">
+    <div class="value-item reveal">
+      <div class="value-ring">🎓</div>
+      <h4>Academic Rigor</h4>
+      <p>Challenging curriculum that pushes boundaries and cultivates critical thinkers.</p>
+    </div>
+    <div class="value-item reveal reveal-delay-1">
+      <div class="value-ring">🤝</div>
+      <h4>Integrity</h4>
+      <p>Ethical foundations that shape responsible, compassionate citizens.</p>
+    </div>
+    <div class="value-item reveal reveal-delay-2">
+      <div class="value-ring">🎨</div>
+      <h4>Creativity</h4>
+      <p>Nurturing artistic expression, innovation, and out-of-the-box thinking.</p>
+    </div>
+    <div class="value-item reveal reveal-delay-3">
+      <div class="value-ring">⚡</div>
+      <h4>Discipline</h4>
+      <p>Structured environment that builds focus, resilience, and self-mastery.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery" id="gallery">
+  <div class="section-tag reveal">
+    <div class="section-tag-line"></div>
+    <span>Campus Life</span>
+  </div>
+  <h2 class="section-title reveal reveal-delay-1">Life at Sheetla</h2>
+  <p class="section-desc reveal reveal-delay-2">Where learning meets joy — a glimpse into our vibrant school community.</p>
+
+  <div class="gallery-grid reveal reveal-delay-3">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=600&fit=crop" alt="School Assembly">
+      <div class="gallery-overlay"><span>Morning Assembly</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=400&fit=crop" alt="Classroom">
+      <div class="gallery-overlay"><span>Interactive Classrooms</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=400&fit=crop" alt="Students">
+      <div class="gallery-overlay"><span>Happy Students</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&h=400&fit=crop" alt="Library">
+      <div class="gallery-overlay"><span>Library & Learning</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop" alt="Sports">
+      <div class="gallery-overlay"><span>Sports & Fitness</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="section-tag reveal" style="justify-content:center;">
+    <div class="section-tag-line"></div>
+    <span>Testimonials</span>
+  </div>
+  <h2 class="section-title reveal reveal-delay-1">Voices of Trust</h2>
+
+  <div class="testimonial-slider reveal reveal-delay-2">
+    <div class="testimonial-card active">
+      <div class="testimonial-quote">
+        Sheetla Public School has truly transformed my child's confidence and academic performance. The teachers go beyond the classroom to ensure every student thrives.
+      </div>
+      <div class="testimonial-author">Sunita Devi</div>
+      <div class="testimonial-role">Parent of Class 5 Student</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">
+        The balance between academics and values education here is remarkable. My children have grown not just as students but as responsible human beings.
+      </div>
+      <div class="testimonial-author">Rajesh Kumar</div>
+      <div class="testimonial-role">Parent of Class 3 & 7 Students</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">
+        The scholarship program gave my child an opportunity we could never have afforded. We are forever grateful to Sheetla Public School for believing in talent over means.
+      </div>
+      <div class="testimonial-author">Pooja Sharma</div>
+      <div class="testimonial-role">Parent of Scholarship Awardee</div>
+    </div>
+    <div class="testimonial-dots">
+      <button class="t-dot active" onclick="showTestimonial(0)"></button>
+      <button class="t-dot" onclick="showTestimonial(1)"></button>
+      <button class="t-dot" onclick="showTestimonial(2)"></button>
+    </div>
+  </div>
+</section>
+
+<!-- Admission CTA -->
+<section class="admission-cta" id="admission">
+  <div class="cta-box">
+    <div class="section-tag reveal" style="justify-content:center;">
+      <div class="section-tag-line"></div>
+      <span>Admissions 2026–27</span>
+    </div>
+    <h2 class="section-title reveal reveal-delay-1">Begin Your Child's <em>Journey</em></h2>
+    <p class="reveal reveal-delay-2">
+      Pratibha Samman Pariksha cum Scholarship/Admission Test — 15th March 2026, Sunday at 9:30 AM. Free registration for K.G. to 8th Class. Avail scholarship benefits from 30% to 100% fee waiver.
+    </p>
+    <div class="cta-info reveal reveal-delay-3">
+      <div class="cta-info-item">
+        <span>📅</span><span>15 March 2026</span>
+      </div>
+      <div class="cta-info-item">
+        <span>🕤</span><span>9:30 AM</span>
+      </div>
+      <div class="cta-info-item">
+        <span>🎫</span><span>Free Registration</span>
+      </div>
+    </div>
+    <a href="#contact" class="btn-primary reveal reveal-delay-4" style="display:inline-block;">Register Now</a>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div>
+    <div class="section-tag reveal">
+      <div class="section-tag-line"></div>
+      <span>Get in Touch</span>
+    </div>
+    <h2 class="section-title reveal reveal-delay-1">We'd Love to<br>Hear From You</h2>
+    <p class="section-desc reveal reveal-delay-2">Visit our campus or reach out — our doors are always open for aspiring families.</p>
+    <div class="contact-details reveal reveal-delay-3">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <h4>Campus Address</h4>
+          <p>Lakhanmajra, Rohtak, Haryana</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <h4>Call Us</h4>
+          <p>8607692460 / 7015437854</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <h4>Office Hours</h4>
+          <p>Mon – Sat: 9:30 AM – 4:00 PM</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🌐</div>
+        <div>
+          <h4>Follow Us</h4>
+          <p>@sheetlapublicschool on Instagram</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h3 style="font-family:'Playfair Display',serif; font-size:24px; color:var(--gold); margin-bottom:10px;" class="reveal">Enquiry Form</h3>
+    <p style="color:rgba(255,255,255,0.4); font-size:14px; margin-bottom:20px;" class="reveal reveal-delay-1">Fill in the details and we'll get back to you shortly.</p>
+    <div class="contact-form reveal reveal-delay-2">
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" placeholder="Student's Name">
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="Parent's Name">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input type="tel" placeholder="Phone Number">
+        </div>
+        <div class="form-group">
+          <select>
+            <option value="" disabled selected>Select Class</option>
+            <option>Nursery / K.G.</option>
+            <option>Class 1 – 3</option>
+            <option>Class 4 – 5</option>
+            <option>Class 6 – 8</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder="Village / City">
+      </div>
+      <div class="form-group">
+        <textarea placeholder="Any message or query..."></textarea>
+      </div>
+      <button class="btn-primary" style="align-self:flex-start;">Submit Enquiry</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-brand" style="text-decoration:none;">
+        <div class="nav-crest">S</div>
+        <div class="nav-name">
+          Sheetla Public School
+          <small>CBSE Affiliated</small>
+        </div>
+      </div>
+      <div class="footer-motto">"Excellence in Education & Values"</div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <a href="#about">About Us</a>
+        <a href="#programs">Programs</a>
+        <a href="#gallery">Campus Life</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Admissions</h5>
+        <a href="#admission">Apply Now</a>
+        <a href="#admission">Scholarship Test</a>
+        <a href="#contact">Fee Structure</a>
+        <a href="#contact">Visit Campus</a>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <a href="#">Instagram</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">Google Maps</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Sheetla Public School, Lakhanmajra (Rohtak). All rights reserved.</span>
+    <span>A Venture of Unique Public School, Pugthala, Sonipat</span>
+  </div>
+</footer>
+
+<script>
+// Preloader
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('preloader').classList.add('hide'), 1200);
+});
+
+// Cursor glow (desktop only)
+const glow = document.getElementById('cursorGlow');
+if(window.innerWidth > 768) {
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  });
+} else { glow.style.display = 'none'; }
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal, .stat-item');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => observer.observe(el));
+
+// Counter animation
+const counters = document.querySelectorAll('.stat-number');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.getAttribute('data-target'));
+      const suffix = el.querySelector('span').textContent;
+      let current = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        current += step;
+        if(current >= target) { current = target; clearInterval(timer); }
+        el.innerHTML = Math.floor(current) + '<span>' + suffix + '</span>';
+      }, 25);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
+
+// Testimonial slider
+let currentT = 0;
+const cards = document.querySelectorAll('.testimonial-card');
+const dots = document.querySelectorAll('.t-dot');
+function showTestimonial(i) {
+  cards.forEach(c => c.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  cards[i].classList.add('active');
+  dots[i].classList.add('active');
+  currentT = i;
+}
+setInterval(() => {
+  showTestimonial((currentT + 1) % cards.length);
+}, 5000);
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+});
+</script>
+</body>
+</html>
